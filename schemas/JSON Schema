@@ -1,1 +1,8 @@
 # JSON Schema, CDDL definitions
+
+specification/          # Profile documents
+├── schemas/               # JSON Schema, CDDL definitions
+├── reference-impl/        # Apache 2.0 code
+├── conformance/           # Test cases
+├── docs/                  # Supporting documentation
+└── examples/              # CIR, notice.txt samples
