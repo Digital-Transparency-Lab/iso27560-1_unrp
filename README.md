@@ -1,201 +1,133 @@
-# ISO/IEC 27560-1 Universal Notice Receipt Profile
+# ISO/IEC 27560-1: Universal Notice Receipt Profile
 
-**International Standard for Transparency in Consent and Data Processing**
+**Convention 108+ Code of Conduct | Transparency-by-Default Architecture**
 
----
+[![License: OPN RF-RAND](https://img.shields.io/badge/License-OPN_RF--RAND-blue.svg)]([LICENSE.md](http://LICENSE.md))
 
-## What is the Universal Notice Receipt Profile?
+[![Status: Working Draft](https://img.shields.io/badge/Status-WORKING_DRAFT-yellow.svg)](spec/v1.1/)
 
-The **ISO/IEC 27560-1 Universal Notice Receipt Profile** operationalizes Convention 108+ transparency requirements as deployable infrastructure. It provides standardized mechanisms for controller identification and bilateral proof-of-notice **before** personal data processing begins.
+[![Version: 1.1 Draft](https://img.shields.io/badge/Version-1.1_DRAFT-orange.svg)]([CHANGELOG.md](http://CHANGELOG.md))
 
-**Core Components**:
+> **⚠️ WORKING DRAFT**: v1.1 is under active development (Q1-Q4 2026). For stable implementation, use [v1.01](spec/v1.01/).
+> 
 
-- **Controller Identification Records (CIRs)**: Machine-readable controller identity and processing claims discoverable at `/.well-known/notice.txt` before processing, for example '/transparency/notice.txt`
-- **Anchored Notice & Consent Receipts (ANCR/MVCR)**: Cryptographically verifiable bilateral records synchronized between controller and individual
-- **Notice Event Logs**: Immutable audit trails tracking all transparency state changes across processing contexts
-- **Four TATA Levels**: Transparency and Trust Assurance levels (L1 self-assertion → L4 high-assurance active state) enabling proportional deployment
+## Overview
 
-**Architectural Principle**: **Controller-ID First** — controller identification disclosed before any device identifiers or personal data collection, inverting surveillance-by-default architecture.
+ISO/IEC 27560-1 Universal Notice Receipt Profile provides Digital Public Transparency Infrastructure (DPTI) enabling:
 
----
+- **Controller-ID First**: Machine-readable Controller Identification Records (CIR)
+- **Bilateral Receipts**: Notice Receipts held by both controller and individual
+- **Four Assurance Levels**: Self-assertion → Registry verification → DTTO notarization → Active state
+- **Cross-Border Coordination**: Convention 108+ treaty framework (55+ countries)
+- **Privacy-Enabling Architecture**: Individuals control data sharing; organizations use data with authorization
 
-## Why It Matters
+### What's New in v1.1 (Draft)
 
-### Regulatory Capacity Infrastructure
+- ✅ **Privacy Preference Signals** (GPC, DNT integration)
+- ✅ **Digital Transparency Risk Assurance Levels** (blind data notary, DTTO certification)
+- ✅ **Global Privacy Rights Controls** (72 transparency contexts, automated APIs)
+- ✅ **OAuth/UMA Integration** (authorization server alignment)
+- ✅ **Consent Token Specifications** (JWT, CBOR, Verifiable Credentials)
+- ✅ **AI System Transparency** (ISO/IEC 42001 coordination)
+- ✅ **Private-Personal-AI** (Appendix K: individual-controlled model training)
 
-ISO/IEC 27560-1 provides **enforcement infrastructure at scale** for privacy regulators:
 
-- **Discoverable compliance**: Regulators can verify controller claims via public CIR registries without prior surveillance
-- **Automated monitoring**: Notice event logs enable algorithmic detection of material changes, consent invalidation, or unlawful processing
-- **Cross-border coordination**: Standardized transparency records enable "Commonwealth Effect" — coordinated enforcement across jurisdictions
-- **Reduced administrative burden**: Controllers maintain one set of transparency records consumable by multiple regulators
+## Implementation Status
 
-### Privacy-Enabling Control
+| Feature | v1.01 | v1.1 Draft | Target |
+| --- | --- | --- | --- |
+| Controller Identity Record (CIR) | ✅ Stable | ✅ Enhanced | v1.01 |
+| Notice Receipts (Stages 1-4) | ✅ Stable | ✅ Enhanced | v1.01 |
+| Notice Event Log | ✅ Stable | ✅ Enhanced | v1.01 |
+| Privacy Preference Signals | ❌ | ✅ Draft | Q1 2026 |
+| TATA Levels 1-4 | ⚠️ Partial L1 | ✅ Draft | Q3 2026 |
+| GPRC (72 Contexts) | ❌ | ✅ Draft | Q3 2026 |
+| OAuth/UMA Integration | ❌ | ✅ Draft | Q2 2026 |
+| Consent Tokens | ⚠️ Basic | ✅ Draft | Q2 2026 |
+| AI System Transparency | ❌ | ✅ Draft | Q3 2026 |
+| Reference Implementations | ⚠️ Python | 🚧 Multi-lang | Q1 2026 |
 
-This is **privacy-enabling data control**, not privacy-preserving data protection:
+## Conformance Levels
 
-- **Individual agency**: Individuals control which controllers they choose to trust through verifiable CIRs, without corporate identification requirements
-- **Consent by default with 2FN**: PII Principal as Master Controller — individual self-identifies and binds identity to chosen CIRs (surveillance inversion)
-- **Glass-box transparency**: Real-time visibility into processing activities through notice event logs and active state signaling
-- **Portable consent**: ANCR receipts enable consent portability across services without vendor lock-in
+### v1.01 (Stable)
 
-**Key Distinction**: Controllers using individual data (service uses consent); individuals NOT "users" of services that process their data.
+- **Universal Notice Receipt Profile Conformance**: Bilateral receipts, CIR publication, Notice Event Log
 
----
+### v1.1 (Draft - Q1-Q4 2026)
 
-## Quick Start for Implementers
+- **Enhanced Privacy Preference Conformance**: GPC signal handling within 48 hours
+- **TATA Level 3+ Conformance**: DTTO certification or Active State API
+- **GPRC Conformance**: Automated rights APIs across 72 contexts
+- **AI System Transparency Conformance**: ISO/IEC 42001 coordination
 
-### Level 1 (Self-Assertion) — Minimal Deployment
+## Architecture Principles
 
-**Goal**: Publish basic controller transparency
+### Privacy-Enabling vs. Privacy-Preserving
 
-1. **Create Controller Identification Record** at `/.well-known/notice.txt`:
-    - controller_name, controller_id (UUID or registered identifier)
-    - contact_info (privacy officer email/URL)
-    - lawful_basis (consent, contract, legitimate_interest, etc.)
-    - processing_purposes, data_categories, retention_period
-2. **Initialize Notice Event Log**: Start logging notice_issued events
-3. **Deploy in services**: Reference CIR in privacy notices, cookie banners, APIs
+|  | **Privacy-Preserving** | **Privacy-Enabling** (This Spec) |
+| --- | --- | --- |
+| **Control** | Organizations protect data | **Individuals control sharing** |
+| **Architecture** | Encryption, anonymization | **Transparency-by-Default** |
+| **Pattern** | "Trust us" (surveillance) | **"I choose to trust" (sousveillance)** |
+| **Enforcement** | Post-hoc fines | **Preventive verification** |
 
-**Outcome**: Discoverable baseline transparency with no third-party dependencies
+### Controller-ID First
 
-### Level 2 (Registered Controller) — Registry Integration
+```
+Traditional (Surveillance):
+	Cookie deployed → Banner shown → "Consent" clicked → Identity obscured
 
-**Goal**: Verifiable controller registration
+Transparency-by-Default (This Spec):
+	CIR published → Individual reviews → Authorization granted → Processing begins
+```
 
-1. Register controller with authorized registry (e.g., ICO Controller Registry, GDTA registry)
-2. Obtain registered controller_id and embed in CIR
-3. Enable optional notice receipts with registry timestamp
+## Related 0PN Lab Projects (work in Progress)
 
-**Outcome**: Registrar-verified controller identity, foundation for ANCR
-
-### Level 3 (ANCR) — Cryptographic Receipts
-
-**Goal**: Bilateral proof-of-notice with cryptographic integrity
-
-1. Implement ANCR issuance: Generate receipt with controller signature, blind data-notary timestamp
-2. Provide receipt to individual (JSON/JWT format) and store controller copy
-3. Enable receipt verification API for individuals and regulators
-4. Update notice event log with consent_granted, receipt_issued events
-
-**Outcome**: Tamper-evident consent records, portable across services
-
-### Level 4 (Active State High Assurance) — Real-Time Control
-
-**Goal**: Real-time transparency and control with high-assurance identity
-
-1. Deploy certified DTTO (Digital Transparency Trust Operator) notarization
-2. Enable active state signaling for real-time access/revocation
-3. Implement liveliness assurance (face-to-face or equivalent)
-4. Provide real-time notice event log access to individuals
-
-**Outcome**: High-assurance environments (e.g., age assurance, national ID, AI governance)
-
----
-
-## Specification Documents
-
-### Normative References
-
-- **ISO/IEC 27560:2025-1** (v1.01 Profile Specification): Draft specification (publication pending Q2 2026)
-- **Council of Europe Convention 108+**: Articles 5, 8, 11, 14 (normative framework) - [Official text](https://rm.coe.int/convention-108-convention-for-the-protection-of-individuals-with-regar/16808b36f1)
-- **ISO/IEC TS 27560:2023**: Published standard - [ISO catalogue](https://www.iso.org/standard/80392.html) (freely available)
-- **DPCat Specification**: Interoperable cataloging for Controller Identification Records (specification in development)
-- **W3C Data Privacy Vocabulary (DPV)**: [w3id.org/dpv](http://w3id.org/dpv) (semantic interoperability)
-- **Convention 108+ DPV Extension**: W3C extension proposal (Q1 2026 submission)
-
-### Implementation Guides
-
-- **Controller Identification Record Schema**: JSON schema and examples (see specification §4.2)
-- **Notice Event Log Format**: Event types, required fields, retention rules (see specification §4.4)
-- **ANCR/MVCR Receipt Structure**: Signature methods, timestamp protocols (see specification §5.3)
-- **TATA Level Selection Guide**: Risk-proportional transparency deployment (see specification §3.2)
-
-### Related Standards
-
-- **ISO/IEC 27566-1**: Age assurance frameworks - [ISO catalogue](https://www.iso.org/standard/72168.html)
-- **ISO/IEC 29184:2020**: Online privacy notices - [ISO catalogue](https://www.iso.org/standard/70331.html)
-- **ISO/IEC 29100:2011**: Privacy framework - [Free access](https://standards.iso.org/ittf/PubliclyAvailableStandards/)
-- **ISO/IEC 27018**: PII protection in public clouds - [ISO catalogue](https://www.iso.org/standard/76559.html)
-
----
-
-## Project Status
-
-**Current Version**: ISO/IEC 27560:2025 v1.0 submission
-
-**Development Phase**: Public comment and pilot deployment
-
-**Submission Timeline**:
-
-- ✅ **v1.0 Specification Complete** (December 2025)
-- 🔄 **Public Review Period** (Q1 2026)
-- 🔄 **Pilot Deployments  **:
-    - 
-- ⏳ **ISO/IEC JTC 1/SC 27/WG 5 Review** (Q2 2026)
-- ⏳ **v1.1 Revision** (based on pilot feedback, Q3 2026)
-
-**Implementation Status**:
-
-- **CIR Reference Implementation**: GitLab repository (this repo)
-- **Notice Event Log Library**: Python, JavaScript libraries (in development)
-- **ANCR Validation Tools**: Receipt verification API and CLI tools (planned Q1 2026)
-- **DPCat Integration**: Convention 108+ DPV extension for catalog interoperability
-
-**Coordination Initiatives**:
-
-- **Global Digital Transparency Alliance (GDTA)**: Regulatory capacity research and co-regulatory infrastructure (decision Feb 2, 2026)
-- **Commonwealth Privacy Regulators**: Coordinated adoption for "Commonwealth Effect" enforcement
-- **W3C DPVCG Engagement**: Convention 108+ DPV extension submission (Q1 2026)
-
----
-
-## License
-
-**RF-RAND IPR License** (Royalty-Free, Reasonable and Non-Discriminatory)
-
-This profile is developed as open infrastructure for regulatory capacity. Implementers may use, modify, and deploy without licensing fees.
-
----
+- 🧪 [**TPI-R Methodology**](https://github.com/0pn-lab/tpi-methodology): Transparency Performance Indicators (regulatory-grade)
+- 🤖 [**0PN-AI**](https://github.com/0pn-lab/0pn-ai): Controller-side transparency machine (Q1-Q2 2026)
+- 🔐 [**Priv8AI**](https://github.com/0pn-lab/priv8ai): Personal-side PII Principal AI (Q2-Q4 2026)
+- 📦 [**Implementation Guides**](https://github.com/0pn-lab/implementation-guides): Project Kits for tiered rollout
+- 🌐 [**ISO/IEC 27560-2**](https://github.com/0pn-lab/iso-27560-2-clean-ai): Clean-AI training data provenance (future)
 
 ## Contributing
 
-Contributions welcome via GitLab issues and merge requests.
+0PN Lab welcomes feedback from:
 
-**Key Areas for Contribution**:
+- **Standards Bodies**: ISO/IEC JTC 1/SC 27 WG5, W3C, IETF, Kantara
+- **Regulators**: Data Protection Authorities, Convention 108 Committee
+- **Implementers**: Controllers, privacy officers, developers
+- **Researchers**: Privacy, security, AI governance
 
-- Reference implementations (libraries, APIs)
-- Deployment case studies and pilot results
-- Interoperability testing with existing privacy frameworks
-- Translation and localization
+See [CONTRIBUTING.md](http://CONTRIBUTING.md) for guidelines.
 
-**Contact**:
+## Development Timeline (v1.1)
 
-- **Profile Editor**: Mark Lizar, ISO/IEC 27560-1 Profile Editor
-- **Organization**: Digital Transparency Lab
-- **Email**: [mark@transparencylab.ca](mailto:mark@transparencylab.ca)
+- **Q1 2026**: Privacy Preference Signal Pilot (GPC integration)
+- **Q2 2026**: TATA Level 3 Protocols (DTTO certification, blind data notary)
+- **Q3 2026**: GPRC Framework + Automated Rights APIs
+- **Q4 2026**: Full v1.1 Integration + Certification Program
+
+## License
+
+This specification is published under the **OPN RF-RAND IPR License**.
+
+See [LICENSE.md](http://LICENSE.md) for full terms.
+
+**Summary**: Royalty-free for implementation; reasonable and non-discriminatory terms for patents.
+
+## About 0PN Lab
+
+**0PN Lab** (Zero spoken as 0pen-Public-Notice Lab) develops Digital Public Transparency Infrastructure (DPTI) as regulatory capacity infrastructure.
+
+- 🌐 **Blog**: [lab.0pn.org](http://lab.0pn.org)
+- 🔬 **Website**: [transparencylab.ca](http://transparencylab.ca)
+- 📧 **Contact**: [standards@0pn.org](mailto:standards@0pn.org)
+- 💬 **Community**: [GitHub Discussions](https://github.com/0pn-lab/iso-27560-unrp/discussions)
+
+**Author**: Mark Lizar, @)0PN Digital Transparency Lab  - A Global Privacy Rights Company
+
+**Chair, Convention 108 Committee Keynote**: [Beatriz de Anchorena](https://0pn.org/events/international-privacy-day-2026)
 
 ---
 
-## Additional Resources
-
-### GDTA Resources
-
-- **GDTA Website**: [gdtagroup.org](http://gdtagroup.org) - [gdta.online](http://gdta.online) Global Digital Transparency Alliance - Forum
-- **Founding Inquiries**: [info@gdta.online](mailto:info@gdta.online)
-
-### Related Standards Bodies
-
-- **ISO/IEC JTC 1/SC 27/WG 5**: Privacy technologies working group - [ISO Committee](https://www.iso.org/committee/45306.html)
-- **W3C DPVCG**: Data Privacy Vocabularies and Controls Community Group - [W3C page](https://www.w3.org/community/dpvcg/)
-- **Kantara Initiative**: Consent receipt specifications - [Kantara](https://kantarainitiative.org)
-
-### Convention 108+ Framework
-
-- **Convention 108+ Treaty**: [Council of Europe](https://rm.coe.int/convention-108-convention-for-the-protection-of-individuals-with-regar/16808b36f1)
-- **Ratification status**: 55+ jurisdictions - [Treaty status](https://www.coe.int/en/web/conventions/full-list)
-- **EU Regulation 2018/1725**: Operational model for institutional transparency - [EUR-Lex](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32018R1725)
-
----
-
-**Last Updated**: December 29, 2025
+*Published by 0PN Lab | Convention 108+ Code of Conduct | Transparency-by-Default Architecture*
